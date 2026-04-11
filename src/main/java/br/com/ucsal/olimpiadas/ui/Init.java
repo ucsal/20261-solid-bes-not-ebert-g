@@ -2,16 +2,16 @@ package br.com.ucsal.olimpiadas.ui;
 
 import br.com.ucsal.olimpiadas.domain.entity.Prova;
 import br.com.ucsal.olimpiadas.domain.entity.Questao;
-import br.com.ucsal.olimpiadas.domain.repository.ProvaRepository;
-import br.com.ucsal.olimpiadas.domain.repository.QuestaoRepository;
+import br.com.ucsal.olimpiadas.domain.repository.IRepository.IProvaRepository;
+import br.com.ucsal.olimpiadas.domain.repository.IRepository.IQuestaoRepository;
 
 public class Init {
-    private final ProvaRepository provaRepository;
-    private final QuestaoRepository questaoRepository;
+    private final IProvaRepository provaRepository;
+    private final IQuestaoRepository IQuestaoRepository;
 
-    public Init(ProvaRepository provaRepository, QuestaoRepository questaoRepository) {
+    public Init(IProvaRepository provaRepository, IQuestaoRepository IQuestaoRepository) {
         this.provaRepository = provaRepository;
-        this.questaoRepository = questaoRepository;
+        this.IQuestaoRepository = IQuestaoRepository;
     }
 
     public void seed() {
@@ -22,7 +22,7 @@ public class Init {
         provaRepository.salvarProva(prova);
 
         var q1 = new Questao();
-        q1.setId(questaoRepository.proximaQuestao() + 1);
+        q1.setId(IQuestaoRepository.proximaQuestao() + 1);
         q1.setProvaId(prova.getId());
 
         q1.setEnunciado("""
@@ -37,7 +37,7 @@ public class Init {
 
         q1.setAlternativaCorreta('C');
 
-        questaoRepository.salvarQuestao(q1);
+        IQuestaoRepository.salvarQuestao(q1);
     }
 
 }

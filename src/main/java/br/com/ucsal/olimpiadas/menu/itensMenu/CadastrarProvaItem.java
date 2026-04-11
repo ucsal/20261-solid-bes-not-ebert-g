@@ -1,17 +1,17 @@
 package br.com.ucsal.olimpiadas.menu.itensMenu;
 
 import br.com.ucsal.olimpiadas.domain.entity.Prova;
-import br.com.ucsal.olimpiadas.domain.repository.ProvaRepository;
+import br.com.ucsal.olimpiadas.domain.repository.IRepository.IProvaRepository;
 
 import java.util.Scanner;
 
 public class CadastrarProvaItem implements ItemMenu {
     private final String descricao = "Cadastrar prova";
-    private final ProvaRepository provaRepository;
+    private final IProvaRepository provaRepository;
     private final Scanner in;
 
 
-    public CadastrarProvaItem(ProvaRepository provaRepository, Scanner in) {
+    public CadastrarProvaItem(IProvaRepository provaRepository, Scanner in) {
         this.provaRepository = provaRepository;
         this.in = in;
     }

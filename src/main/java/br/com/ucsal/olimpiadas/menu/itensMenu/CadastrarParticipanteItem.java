@@ -1,17 +1,17 @@
 package br.com.ucsal.olimpiadas.menu.itensMenu;
 
 import br.com.ucsal.olimpiadas.domain.entity.Participante;
-import br.com.ucsal.olimpiadas.domain.repository.ParticipanteRepository;
+import br.com.ucsal.olimpiadas.domain.repository.IRepository.IParticipanteRepository;
 
 import java.util.Scanner;
 
 public class CadastrarParticipanteItem implements ItemMenu {
     private final String descricao = "Cadastrar participante";
-    private final ParticipanteRepository participanteRepository;
+    private final IParticipanteRepository participanteRepository;
     private final Scanner in;
 
 
-    public CadastrarParticipanteItem(ParticipanteRepository participanteRepository, Scanner in) {
+    public CadastrarParticipanteItem(IParticipanteRepository participanteRepository, Scanner in) {
         this.participanteRepository = participanteRepository;
         this.in = in;
     }

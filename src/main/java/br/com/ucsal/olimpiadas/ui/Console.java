@@ -1,16 +1,16 @@
 package br.com.ucsal.olimpiadas.ui;
 
-import br.com.ucsal.olimpiadas.domain.repository.ParticipanteRepository;
-import br.com.ucsal.olimpiadas.domain.repository.ProvaRepository;
+import br.com.ucsal.olimpiadas.domain.repository.IRepository.IParticipanteRepository;
+import br.com.ucsal.olimpiadas.domain.repository.IRepository.IProvaRepository;
 
 import java.util.Scanner;
 
 public class Console {
-    private final ParticipanteRepository participanteRepository;
-    private final ProvaRepository provaRepository;
+    private final IParticipanteRepository participanteRepository;
+    private final IProvaRepository provaRepository;
     private final Scanner in;
 
-    public Console(ParticipanteRepository participanteRepository, ProvaRepository provaRepository, Scanner in) {
+    public Console(IParticipanteRepository participanteRepository, IProvaRepository provaRepository, Scanner in) {
         this.participanteRepository = participanteRepository;
         this.provaRepository = provaRepository;
         this.in = in;

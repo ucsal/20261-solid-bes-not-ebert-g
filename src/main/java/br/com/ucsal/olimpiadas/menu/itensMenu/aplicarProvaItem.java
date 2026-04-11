@@ -3,10 +3,10 @@ package br.com.ucsal.olimpiadas.menu.itensMenu;
 import br.com.ucsal.olimpiadas.domain.entity.Questao;
 import br.com.ucsal.olimpiadas.domain.entity.Resposta;
 import br.com.ucsal.olimpiadas.domain.entity.Tentativa;
-import br.com.ucsal.olimpiadas.domain.repository.ParticipanteRepository;
-import br.com.ucsal.olimpiadas.domain.repository.ProvaRepository;
-import br.com.ucsal.olimpiadas.domain.repository.QuestaoRepository;
-import br.com.ucsal.olimpiadas.domain.repository.TentativaRepository;
+import br.com.ucsal.olimpiadas.domain.repository.IRepository.IParticipanteRepository;
+import br.com.ucsal.olimpiadas.domain.repository.IRepository.IProvaRepository;
+import br.com.ucsal.olimpiadas.domain.repository.IRepository.IQuestaoRepository;
+import br.com.ucsal.olimpiadas.domain.repository.IRepository.ITentativaRepository;
 import br.com.ucsal.olimpiadas.service.PontuacaoService;
 import br.com.ucsal.olimpiadas.ui.Console;
 
@@ -14,20 +14,20 @@ import java.util.Scanner;
 
 public class aplicarProvaItem implements ItemMenu {
     private final String descricao = "Aplicar prova (selecionar participante + prova)";
-    private final ParticipanteRepository participanteRepository;
-    private final QuestaoRepository questaoRepository;
-    private final ProvaRepository provaRepository;
-    private final TentativaRepository tentativaRepository;
+    private final IParticipanteRepository participanteRepository;
+    private final IQuestaoRepository IQuestaoRepository;
+    private final IProvaRepository provaRepository;
+    private final ITentativaRepository ITentativaRepository;
     private final PontuacaoService pontuacaoService;
     private final Console console;
     private final Scanner in;
 
 
-    public aplicarProvaItem(ParticipanteRepository participanteRepository, QuestaoRepository questaoRepository, ProvaRepository provaRepository, TentativaRepository tentativaRepository, PontuacaoService pontuacaoService, Console console, Scanner in) {
+    public aplicarProvaItem(IParticipanteRepository participanteRepository, IQuestaoRepository IQuestaoRepository, IProvaRepository provaRepository, ITentativaRepository ITentativaRepository, PontuacaoService pontuacaoService, Console console, Scanner in) {
         this.participanteRepository = participanteRepository;
-        this.questaoRepository = questaoRepository;
+        this.IQuestaoRepository = IQuestaoRepository;
         this.provaRepository = provaRepository;
-        this.tentativaRepository = tentativaRepository;
+        this.ITentativaRepository = ITentativaRepository;
         this.pontuacaoService = pontuacaoService;
         this.console = console;
         this.in = in;
@@ -51,7 +51,7 @@ public class aplicarProvaItem implements ItemMenu {
         if (provaId == null)
             return;
 
-        var questoesDaProva = questaoRepository.buscarQuestoes().stream().filter(q -> q.getProvaId() == provaId).toList();
+        var questoesDaProva = IQuestaoRepository.buscarQuestoes().stream().filter(q -> q.getProvaId() == provaId).toList();
 
         if (questoesDaProva.isEmpty()) {
             System.out.println("esta prova não possui questões cadastradas");
@@ -59,7 +59,7 @@ public class aplicarProvaItem implements ItemMenu {
         }
 
         var tentativa = new Tentativa();
-        tentativa.setId(tentativaRepository.proximaTentativa() + 1);
+        tentativa.setId(ITentativaRepository.proximaTentativa() + 1);
         tentativa.setParticipanteId(participanteId);
         tentativa.setProvaId(provaId);
 
@@ -93,7 +93,7 @@ public class aplicarProvaItem implements ItemMenu {
             tentativa.getRespostas().add(r);
         }
 
-        tentativaRepository.salvaTentativa(tentativa);
+        ITentativaRepository.salvaTentativa(tentativa);
 
         int nota = pontuacaoService.calcularNota(tentativa);
         System.out.println("\n--- Fim da Prova ---");

@@ -1,8 +1,8 @@
 package br.com.ucsal.olimpiadas.menu.itensMenu;
 
 import br.com.ucsal.olimpiadas.domain.entity.Questao;
-import br.com.ucsal.olimpiadas.domain.repository.ProvaRepository;
-import br.com.ucsal.olimpiadas.domain.repository.QuestaoRepository;
+import br.com.ucsal.olimpiadas.domain.repository.IRepository.IProvaRepository;
+import br.com.ucsal.olimpiadas.domain.repository.IRepository.IQuestaoRepository;
 import br.com.ucsal.olimpiadas.ui.Console;
 
 import java.util.Scanner;
@@ -10,14 +10,14 @@ import java.util.Scanner;
 public class CadastrarQuestaoItem implements ItemMenu {
     private final String descricao = "Cadastrar questão (A–E) em uma prova\"";
 
-    private final QuestaoRepository questaoRepository;
-    private final ProvaRepository provaRepository;
+    private final IQuestaoRepository IQuestaoRepository;
+    private final IProvaRepository provaRepository;
     private final Console console;
     private final Scanner in;
 
 
-    public CadastrarQuestaoItem(QuestaoRepository questaoRepository, ProvaRepository provaRepository, Console console, Scanner in) {
-        this.questaoRepository = questaoRepository;
+    public CadastrarQuestaoItem(IQuestaoRepository IQuestaoRepository, IProvaRepository provaRepository, Console console, Scanner in) {
+        this.IQuestaoRepository = IQuestaoRepository;
         this.provaRepository = provaRepository;
         this.console = console;
         this.in = in;
@@ -53,13 +53,13 @@ public class CadastrarQuestaoItem implements ItemMenu {
         }
 
         var q = new Questao();
-        q.setId(questaoRepository.proximaQuestao() + 1);
+        q.setId(IQuestaoRepository.proximaQuestao() + 1);
         q.setProvaId(provaId);
         q.setEnunciado(enunciado);
         q.setAlternativas(alternativas);
         q.setAlternativaCorreta(correta);
 
-        questaoRepository.salvarQuestao(q);
+        IQuestaoRepository.salvarQuestao(q);
 
         System.out.println("Questão cadastrada: " + q.getId() + " (na prova " + provaId + ")");
     }
