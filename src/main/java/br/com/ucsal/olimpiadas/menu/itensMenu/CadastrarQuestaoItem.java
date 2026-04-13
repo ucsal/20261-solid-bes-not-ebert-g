@@ -3,7 +3,7 @@ package br.com.ucsal.olimpiadas.menu.itensMenu;
 import br.com.ucsal.olimpiadas.domain.entity.Questao;
 import br.com.ucsal.olimpiadas.domain.repository.IRepository.IProvaRepository;
 import br.com.ucsal.olimpiadas.domain.repository.IRepository.IQuestaoRepository;
-import br.com.ucsal.olimpiadas.ui.Console;
+import br.com.ucsal.olimpiadas.ui.UiConsole;
 
 import java.util.Scanner;
 
@@ -12,14 +12,14 @@ public class CadastrarQuestaoItem implements ItemMenu {
 
     private final IQuestaoRepository IQuestaoRepository;
     private final IProvaRepository provaRepository;
-    private final Console console;
+    private final UiConsole uiConsole;
     private final Scanner in;
 
 
-    public CadastrarQuestaoItem(IQuestaoRepository IQuestaoRepository, IProvaRepository provaRepository, Console console, Scanner in) {
+    public CadastrarQuestaoItem(IQuestaoRepository IQuestaoRepository, IProvaRepository provaRepository, UiConsole uiConsole, Scanner in) {
         this.IQuestaoRepository = IQuestaoRepository;
         this.provaRepository = provaRepository;
-        this.console = console;
+        this.uiConsole = uiConsole;
         this.in = in;
     }
 
@@ -29,7 +29,7 @@ public class CadastrarQuestaoItem implements ItemMenu {
             return;
         }
 
-        var provaId = console.escolherProva();
+        var provaId = uiConsole.escolherProva();
         if (provaId == null)
             return;
 

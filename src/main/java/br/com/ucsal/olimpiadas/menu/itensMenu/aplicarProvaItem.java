@@ -8,7 +8,7 @@ import br.com.ucsal.olimpiadas.domain.repository.IRepository.IProvaRepository;
 import br.com.ucsal.olimpiadas.domain.repository.IRepository.IQuestaoRepository;
 import br.com.ucsal.olimpiadas.domain.repository.IRepository.ITentativaRepository;
 import br.com.ucsal.olimpiadas.service.PontuacaoService;
-import br.com.ucsal.olimpiadas.ui.Console;
+import br.com.ucsal.olimpiadas.ui.UiConsole;
 
 import java.util.Scanner;
 
@@ -19,17 +19,17 @@ public class aplicarProvaItem implements ItemMenu {
     private final IProvaRepository provaRepository;
     private final ITentativaRepository ITentativaRepository;
     private final PontuacaoService pontuacaoService;
-    private final Console console;
+    private final UiConsole uiConsole;
     private final Scanner in;
 
 
-    public aplicarProvaItem(IParticipanteRepository participanteRepository, IQuestaoRepository IQuestaoRepository, IProvaRepository provaRepository, ITentativaRepository ITentativaRepository, PontuacaoService pontuacaoService, Console console, Scanner in) {
+    public aplicarProvaItem(IParticipanteRepository participanteRepository, IQuestaoRepository IQuestaoRepository, IProvaRepository provaRepository, ITentativaRepository ITentativaRepository, PontuacaoService pontuacaoService, UiConsole uiConsole, Scanner in) {
         this.participanteRepository = participanteRepository;
         this.IQuestaoRepository = IQuestaoRepository;
         this.provaRepository = provaRepository;
         this.ITentativaRepository = ITentativaRepository;
         this.pontuacaoService = pontuacaoService;
-        this.console = console;
+        this.uiConsole = uiConsole;
         this.in = in;
     }
 
@@ -43,11 +43,11 @@ public class aplicarProvaItem implements ItemMenu {
             return;
         }
 
-        var participanteId = console.escolherParticipante();
+        var participanteId = uiConsole.escolherParticipante();
         if (participanteId == null)
             return;
 
-        var provaId = console.escolherProva();
+        var provaId = uiConsole.escolherProva();
         if (provaId == null)
             return;
 
@@ -70,7 +70,7 @@ public class aplicarProvaItem implements ItemMenu {
             System.out.println(q.getEnunciado());
 
             System.out.println("Posição inicial:");
-            console.imprimirTabuleiroFen(q.getFenInicial());
+            uiConsole.imprimirTabuleiroFen(q.getFenInicial());
 
             for (var alt : q.getAlternativas()) {
                 System.out.println(alt);

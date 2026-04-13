@@ -5,12 +5,12 @@ import br.com.ucsal.olimpiadas.domain.repository.IRepository.IProvaRepository;
 
 import java.util.Scanner;
 
-public class Console {
+public class UiConsole {
     private final IParticipanteRepository participanteRepository;
     private final IProvaRepository provaRepository;
     private final Scanner in;
 
-    public Console(IParticipanteRepository participanteRepository, IProvaRepository provaRepository, Scanner in) {
+    public UiConsole(IParticipanteRepository participanteRepository, IProvaRepository provaRepository, Scanner in) {
         this.participanteRepository = participanteRepository;
         this.provaRepository = provaRepository;
         this.in = in;

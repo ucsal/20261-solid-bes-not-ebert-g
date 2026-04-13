@@ -8,11 +8,12 @@ import br.com.ucsal.olimpiadas.domain.repository.MemoryRepository.ParticipanteMe
 import br.com.ucsal.olimpiadas.domain.repository.MemoryRepository.ProvaMemoryRepository;
 import br.com.ucsal.olimpiadas.domain.repository.MemoryRepository.QuestaoMemoryRepository;
 import br.com.ucsal.olimpiadas.domain.repository.MemoryRepository.TentativaMemoryRepository;
+import br.com.ucsal.olimpiadas.initialization.Init;
+import br.com.ucsal.olimpiadas.initialization.ItemDeclaration;
 import br.com.ucsal.olimpiadas.menu.Menu;
 import br.com.ucsal.olimpiadas.menu.itensMenu.*;
 import br.com.ucsal.olimpiadas.service.PontuacaoService;
-import br.com.ucsal.olimpiadas.ui.Console;
-import br.com.ucsal.olimpiadas.ui.Init;
+import br.com.ucsal.olimpiadas.ui.UiConsole;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,28 +21,25 @@ import java.util.Scanner;
 
 public class App {
     private final Scanner in = new Scanner(System.in);
+
     private Menu menu = new Menu();
+
+
     private IParticipanteRepository participanteRepository = new ParticipanteMemoryRepository();
     private IProvaRepository provaRepository = new ProvaMemoryRepository();
-    private IQuestaoRepository IQuestaoRepository = new QuestaoMemoryRepository();
-    private ITentativaRepository ITentativaRepository = new TentativaMemoryRepository();
+    private IQuestaoRepository questaoRepository = new QuestaoMemoryRepository();
+    private ITentativaRepository tentativaRepository = new TentativaMemoryRepository();
+
     private PontuacaoService pontuacaoService = new PontuacaoService();
-    private Console console = new Console(participanteRepository, provaRepository, in);
+    private UiConsole uiConsole = new UiConsole(participanteRepository, provaRepository, in);
+    private final Init init = new Init(provaRepository, questaoRepository);
+
     private final Map<String, ItemMenu> itemMenu
-            = new HashMap<>();
-    private final Init init = new Init(provaRepository, IQuestaoRepository);
+            = ItemDeclaration.decItem(in, participanteRepository, provaRepository, questaoRepository, uiConsole, tentativaRepository, pontuacaoService);
 
     public static void main(String[] args) {
         App app = new App();
         app.start();
-    }
-
-    public App() {
-        itemMenu.put("1", new CadastrarParticipanteItem(participanteRepository, in));
-        itemMenu.put("2", new CadastrarProvaItem(provaRepository, in));
-        itemMenu.put("3", new CadastrarQuestaoItem(IQuestaoRepository, provaRepository, console, in));
-        itemMenu.put("4", new aplicarProvaItem(participanteRepository, IQuestaoRepository, provaRepository, ITentativaRepository, pontuacaoService, console, in));
-        itemMenu.put("5", new ListaTentativasItem(ITentativaRepository, pontuacaoService));
     }
 
     private void start() {
