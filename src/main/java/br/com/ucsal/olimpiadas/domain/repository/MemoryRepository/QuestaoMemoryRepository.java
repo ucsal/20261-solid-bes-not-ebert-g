@@ -6,7 +6,7 @@ import br.com.ucsal.olimpiadas.domain.repository.IRepository.IQuestaoRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IQuestaoMemoryRepository implements IQuestaoRepository {
+public class QuestaoMemoryRepository implements IQuestaoRepository {
     private final List<Questao> questoes = new ArrayList<>();
     private long proximaQuestaoId = 0;
 

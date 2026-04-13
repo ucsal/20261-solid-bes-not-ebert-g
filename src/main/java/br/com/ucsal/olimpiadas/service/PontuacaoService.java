@@ -3,7 +3,7 @@ package br.com.ucsal.olimpiadas.service;
 import br.com.ucsal.olimpiadas.domain.entity.Tentativa;
 
 public class PontuacaoService {
-    public  int calcularNota(Tentativa tentativa) {
+    public int calcularNota(Tentativa tentativa) {
         int acertos = 0;
         for (var r : tentativa.getRespostas()) {
             if (r.isCorreta())

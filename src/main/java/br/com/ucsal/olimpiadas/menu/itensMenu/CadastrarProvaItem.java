@@ -13,7 +13,6 @@ public class CadastrarProvaItem implements ItemMenu {
 
     ProvaService provaService = new ProvaService();
 
-
     public CadastrarProvaItem(IProvaRepository provaRepository, Scanner in) {
         this.provaRepository = provaRepository;
         this.in = in;
@@ -26,8 +25,13 @@ public class CadastrarProvaItem implements ItemMenu {
 
     @Override
     public void action() {
-        provaService.cadastrarProva(provaRepository, in);
+        System.out.print("Título da prova: ");
+        var titulo = in.nextLine();
+
+        if (titulo == null || titulo.isBlank()) {
+            System.out.println("título inválido");
+            return;
+        }
+        provaService.cadastrarProva(provaRepository, titulo);
     }
-
-
 }

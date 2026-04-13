@@ -17,11 +17,9 @@ public class aplicarProvaItem implements ItemMenu {
     private final IQuestaoRepository questaoRepository;
     private final IProvaRepository provaRepository;
     private final ITentativaRepository tentativaRepository;
-
     private final PontuacaoService pontuacaoService;
     private final UiConsole uiConsole;
     private final Scanner in;
-
     AplicarProvaService aplicarProvaService = new AplicarProvaService();
 
     public aplicarProvaItem(IParticipanteRepository participanteRepository, IQuestaoRepository questaoRepository, IProvaRepository provaRepository, ITentativaRepository tentativaRepository, PontuacaoService pontuacaoService, UiConsole uiConsole, Scanner in) {
@@ -32,6 +30,7 @@ public class aplicarProvaItem implements ItemMenu {
         this.pontuacaoService = pontuacaoService;
         this.uiConsole = uiConsole;
         this.in = in;
+        this.aplicarProvaService = aplicarProvaService;
     }
 
     @Override

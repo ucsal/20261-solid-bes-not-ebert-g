@@ -10,7 +10,6 @@ public class ProvaMemoryRepository implements IProvaRepository {
     private final List<Prova> provas = new ArrayList<>();
     private long proximaProvaId = 0;
 
-
     @Override
     public void salvarProva(Prova prova) {
         this.provas.add(prova);
@@ -31,6 +30,4 @@ public class ProvaMemoryRepository implements IProvaRepository {
     public List<Prova> buscaProvas() {
         return this.provas;
     }
-
-
 }

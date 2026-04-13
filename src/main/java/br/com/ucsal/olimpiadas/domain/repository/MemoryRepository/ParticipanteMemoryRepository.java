@@ -10,7 +10,6 @@ public class ParticipanteMemoryRepository implements IParticipanteRepository {
     private final List<Participante> participantes = new ArrayList<>();
     private long proximoParticipanteId = 0;
 
-
     @Override
     public void salvarParticipante(Participante participante) {
         participantes.add(participante);
