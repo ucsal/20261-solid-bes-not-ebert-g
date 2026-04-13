@@ -9,10 +9,10 @@ import br.com.ucsal.olimpiadas.domain.repository.MemoryRepository.ProvaMemoryRep
 import br.com.ucsal.olimpiadas.domain.repository.MemoryRepository.QuestaoMemoryRepository;
 import br.com.ucsal.olimpiadas.domain.repository.MemoryRepository.TentativaMemoryRepository;
 import br.com.ucsal.olimpiadas.initialization.InitLoop;
-import br.com.ucsal.olimpiadas.initialization.Seed;
 import br.com.ucsal.olimpiadas.initialization.ItemDeclaration;
+import br.com.ucsal.olimpiadas.initialization.Seed;
 import br.com.ucsal.olimpiadas.menu.Menu;
-import br.com.ucsal.olimpiadas.menu.itensMenu.*;
+import br.com.ucsal.olimpiadas.menu.itensMenu.ItemMenu;
 import br.com.ucsal.olimpiadas.service.PontuacaoService;
 import br.com.ucsal.olimpiadas.ui.UiConsole;
 
@@ -33,8 +33,6 @@ public class App {
         PontuacaoService pontuacaoService = new PontuacaoService();
         UiConsole uiConsole = new UiConsole(participanteRepository, provaRepository, in);
         final Seed seed = new Seed(provaRepository, questaoRepository);
-        InitLoop initLoop = new InitLoop();
-
         final Map<String, ItemMenu> itemMenu
                 = ItemDeclaration.decItem(in, participanteRepository, provaRepository, questaoRepository, uiConsole, tentativaRepository, pontuacaoService);
 
