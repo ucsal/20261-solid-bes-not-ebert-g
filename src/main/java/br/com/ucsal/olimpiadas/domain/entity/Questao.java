@@ -4,76 +4,76 @@ import java.util.Arrays;
 
 public class Questao {
 
-	private long id;
-	private long provaId;
+    private long id;
+    private long provaId;
 
-	private String enunciado;
-	private String[] alternativas = new String[5];
-	private char alternativaCorreta;
+    private String enunciado;
+    private String[] alternativas = new String[5];
+    private char alternativaCorreta;
 
-	private String fenInicial;
+    private String fenInicial;
 
-	public String getFenInicial() {
-		return fenInicial;
-	}
+    public static char normalizar(char c) {
+        char up = Character.toUpperCase(c);
+        if (up < 'A' || up > 'E') {
+            throw new IllegalArgumentException("Alternativa deve estar entre A e E.");
+        }
+        return up;
+    }
 
-	public void setFenInicial(String fenInicial) {
-		this.fenInicial = fenInicial;
-	}
+    public String getFenInicial() {
+        return fenInicial;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public void setFenInicial(String fenInicial) {
+        this.fenInicial = fenInicial;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public long getProvaId() {
-		return provaId;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setProvaId(long provaId) {
-		this.provaId = provaId;
-	}
+    public long getProvaId() {
+        return provaId;
+    }
 
-	public String getEnunciado() {
-		return enunciado;
-	}
+    public void setProvaId(long provaId) {
+        this.provaId = provaId;
+    }
 
-	public void setEnunciado(String enunciado) {
-		this.enunciado = enunciado;
-	}
+    public String getEnunciado() {
+        return enunciado;
+    }
 
-	public String[] getAlternativas() {
-		return alternativas;
-	}
+    public void setEnunciado(String enunciado) {
+        this.enunciado = enunciado;
+    }
 
-	public void setAlternativas(String[] alternativas) {
-		if (alternativas == null || alternativas.length != 5) {
-			throw new IllegalArgumentException("A questão deve possuir exatamente 5 alternativas.");
-		}
-		this.alternativas = Arrays.copyOf(alternativas, 5);
-	}
+    public String[] getAlternativas() {
+        return alternativas;
+    }
 
-	public char getAlternativaCorreta() {
-		return alternativaCorreta;
-	}
+    public void setAlternativas(String[] alternativas) {
+        if (alternativas == null || alternativas.length != 5) {
+            throw new IllegalArgumentException("A questão deve possuir exatamente 5 alternativas.");
+        }
+        this.alternativas = Arrays.copyOf(alternativas, 5);
+    }
 
-	public void setAlternativaCorreta(char alternativaCorreta) {
-		this.alternativaCorreta = normalizar(alternativaCorreta);
-	}
+    public char getAlternativaCorreta() {
+        return alternativaCorreta;
+    }
 
-	public boolean isRespostaCorreta(char marcada) {
-		return normalizar(marcada) == alternativaCorreta;
-	}
+    public void setAlternativaCorreta(char alternativaCorreta) {
+        this.alternativaCorreta = normalizar(alternativaCorreta);
+    }
 
-	public static char normalizar(char c) {
-		char up = Character.toUpperCase(c);
-		if (up < 'A' || up > 'E') {
-			throw new IllegalArgumentException("Alternativa deve estar entre A e E.");
-		}
-		return up;
-	}
+    public boolean isRespostaCorreta(char marcada) {
+        return normalizar(marcada) == alternativaCorreta;
+    }
 
 }

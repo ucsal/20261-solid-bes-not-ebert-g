@@ -1,15 +1,17 @@
 package br.com.ucsal.olimpiadas.menu.itensMenu;
 
-import br.com.ucsal.olimpiadas.domain.entity.Participante;
 import br.com.ucsal.olimpiadas.domain.repository.IRepository.IParticipanteRepository;
+import br.com.ucsal.olimpiadas.service.ParticipanteService;
 
 import java.util.Scanner;
 
 public class CadastrarParticipanteItem implements ItemMenu {
     private final String descricao = "Cadastrar participante";
+
     private final IParticipanteRepository participanteRepository;
     private final Scanner in;
 
+    ParticipanteService participanteService = new ParticipanteService();
 
     public CadastrarParticipanteItem(IParticipanteRepository participanteRepository, Scanner in) {
         this.participanteRepository = participanteRepository;
@@ -17,33 +19,12 @@ public class CadastrarParticipanteItem implements ItemMenu {
     }
 
     @Override
-    public String getDescricao() {
-        return this.descricao;
+    public void action() {
+        participanteService.cadastrarParticipante(in, participanteRepository);
     }
 
     @Override
-    public void action() {
-        this.cadastrarParticipante();
-    }
-
-    private void cadastrarParticipante() {
-        System.out.print("Nome: ");
-        var nome = in.nextLine();
-
-        System.out.print("Email (opcional): ");
-        var email = in.nextLine();
-
-        if (nome == null || nome.isBlank()) {
-            System.out.println("nome inválido");
-            return;
-        }
-
-        var p = new Participante();
-        p.setId(participanteRepository.proximoParticipante() + 1);
-        p.setNome(nome);
-        p.setEmail(email);
-
-        participanteRepository.salvarParticipante(p);
-        System.out.println("Participante cadastrado: " + p.getId());
+    public String getDescricao() {
+        return this.descricao;
     }
 }

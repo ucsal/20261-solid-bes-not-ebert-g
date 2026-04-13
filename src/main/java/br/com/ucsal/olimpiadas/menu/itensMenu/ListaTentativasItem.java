@@ -2,24 +2,23 @@ package br.com.ucsal.olimpiadas.menu.itensMenu;
 
 import br.com.ucsal.olimpiadas.domain.repository.IRepository.ITentativaRepository;
 import br.com.ucsal.olimpiadas.service.PontuacaoService;
+import br.com.ucsal.olimpiadas.service.TentativaService;
 
 public class ListaTentativasItem implements ItemMenu {
     private final String descricao = "Listar tentativas (resumo)";
-
-    private final ITentativaRepository ITentativaRepository;
+    private final ITentativaRepository tentativaRepository;
     private final PontuacaoService pontuacaoService;
 
-    public ListaTentativasItem(ITentativaRepository ITentativaRepository, PontuacaoService pontuacaoService) {
-        this.ITentativaRepository = ITentativaRepository;
+    private final TentativaService tentativaService = new TentativaService();
+
+    public ListaTentativasItem(ITentativaRepository tentativaRepository, PontuacaoService pontuacaoService) {
+        this.tentativaRepository = tentativaRepository;
         this.pontuacaoService = pontuacaoService;
     }
 
-    private void listarTentativas() {
-        System.out.println("\n--- Tentativas ---");
-        for (var t : ITentativaRepository.buscaTentativas()) {
-            System.out.printf("#%d | participante=%d | prova=%d | nota=%d/%d%n", t.getId(), t.getParticipanteId(),
-                    t.getProvaId(), pontuacaoService.calcularNota(t), t.getRespostas().size());
-        }
+    @Override
+    public void action() {
+        tentativaService.listarTentativas(tentativaRepository, pontuacaoService);
     }
 
     @Override
@@ -27,8 +26,4 @@ public class ListaTentativasItem implements ItemMenu {
         return descricao;
     }
 
-    @Override
-    public void action() {
-        this.listarTentativas();
-    }
 }

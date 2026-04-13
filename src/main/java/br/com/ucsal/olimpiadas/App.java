@@ -4,9 +4,9 @@ import br.com.ucsal.olimpiadas.domain.repository.IRepository.IParticipanteReposi
 import br.com.ucsal.olimpiadas.domain.repository.IRepository.IProvaRepository;
 import br.com.ucsal.olimpiadas.domain.repository.IRepository.IQuestaoRepository;
 import br.com.ucsal.olimpiadas.domain.repository.IRepository.ITentativaRepository;
+import br.com.ucsal.olimpiadas.domain.repository.MemoryRepository.IQuestaoMemoryRepository;
 import br.com.ucsal.olimpiadas.domain.repository.MemoryRepository.ParticipanteMemoryRepository;
 import br.com.ucsal.olimpiadas.domain.repository.MemoryRepository.ProvaMemoryRepository;
-import br.com.ucsal.olimpiadas.domain.repository.MemoryRepository.QuestaoMemoryRepository;
 import br.com.ucsal.olimpiadas.domain.repository.MemoryRepository.TentativaMemoryRepository;
 import br.com.ucsal.olimpiadas.initialization.InitLoop;
 import br.com.ucsal.olimpiadas.initialization.ItemDeclaration;
@@ -27,14 +27,14 @@ public class App {
 
         IParticipanteRepository participanteRepository = new ParticipanteMemoryRepository();
         IProvaRepository provaRepository = new ProvaMemoryRepository();
-        IQuestaoRepository questaoRepository = new QuestaoMemoryRepository();
+        IQuestaoRepository IQuestaoRepository = new IQuestaoMemoryRepository();
         ITentativaRepository tentativaRepository = new TentativaMemoryRepository();
 
         PontuacaoService pontuacaoService = new PontuacaoService();
         UiConsole uiConsole = new UiConsole(participanteRepository, provaRepository, in);
-        final Seed seed = new Seed(provaRepository, questaoRepository);
+        final Seed seed = new Seed(provaRepository, IQuestaoRepository);
         final Map<String, ItemMenu> itemMenu
-                = ItemDeclaration.decItem(in, participanteRepository, provaRepository, questaoRepository, uiConsole, tentativaRepository, pontuacaoService);
+                = ItemDeclaration.decItem(in, participanteRepository, provaRepository, IQuestaoRepository, uiConsole, tentativaRepository, pontuacaoService);
 
         InitLoop.start(seed, menu, itemMenu, in);
 

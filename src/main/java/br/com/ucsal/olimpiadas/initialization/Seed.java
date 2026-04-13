@@ -7,11 +7,11 @@ import br.com.ucsal.olimpiadas.domain.repository.IRepository.IQuestaoRepository;
 
 public class Seed {
     private final IProvaRepository provaRepository;
-    private final IQuestaoRepository questaoRepository;
+    private final IQuestaoRepository IQuestaoRepository;
 
-    public Seed(IProvaRepository provaRepository, IQuestaoRepository questaoRepository) {
+    public Seed(IProvaRepository provaRepository, IQuestaoRepository IQuestaoRepository) {
         this.provaRepository = provaRepository;
-        this.questaoRepository = questaoRepository;
+        this.IQuestaoRepository = IQuestaoRepository;
     }
 
     public void seed() {
@@ -22,7 +22,7 @@ public class Seed {
         provaRepository.salvarProva(prova);
 
         var q1 = new Questao();
-        q1.setId(questaoRepository.proximaQuestao() + 1);
+        q1.setId(IQuestaoRepository.proximaQuestao() + 1);
         q1.setProvaId(prova.getId());
 
         q1.setEnunciado("""
@@ -37,7 +37,7 @@ public class Seed {
 
         q1.setAlternativaCorreta('C');
 
-        questaoRepository.salvarQuestao(q1);
+        IQuestaoRepository.salvarQuestao(q1);
     }
 
 }

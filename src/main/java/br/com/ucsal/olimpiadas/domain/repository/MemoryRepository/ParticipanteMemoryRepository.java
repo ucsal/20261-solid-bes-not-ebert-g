@@ -11,7 +11,6 @@ public class ParticipanteMemoryRepository implements IParticipanteRepository {
     private long proximoParticipanteId = 0;
 
 
-
     @Override
     public void salvarParticipante(Participante participante) {
         participantes.add(participante);
@@ -20,7 +19,7 @@ public class ParticipanteMemoryRepository implements IParticipanteRepository {
 
     @Override
     public boolean isEmpty() {
-        return  participantes.isEmpty();
+        return participantes.isEmpty();
     }
 
     @Override

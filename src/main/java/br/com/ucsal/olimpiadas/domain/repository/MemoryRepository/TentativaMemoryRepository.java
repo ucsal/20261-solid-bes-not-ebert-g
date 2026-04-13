@@ -20,6 +20,7 @@ public class TentativaMemoryRepository implements ITentativaRepository {
     public List<Tentativa> buscaTentativas() {
         return this.tentativas;
     }
+
     @Override
     public Long proximaTentativa() {
         return this.proximaTentativaId;
